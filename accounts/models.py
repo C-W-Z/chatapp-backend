@@ -27,8 +27,10 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email=email, password=password, **extra_fields)
 
 class User(AbstractUser):
+    first_name = None
+    last_name = None
     email = models.EmailField(unique=True)
-    username = models.CharField(max_length=50)
+    username = models.CharField(max_length=50, blank=True)
     description = models.CharField(max_length=256, blank=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     date_joined = models.DateTimeField(default=timezone.now)
@@ -38,7 +40,7 @@ class User(AbstractUser):
     objects = CustomUserManager()
     # 將User驗證時使用的Field改為email
     USERNAME_FIELD = "email"
-    # 在創建User帳號時需要提供的Fields
+    # 在createsuperuser時需要提供的Fields
     REQUIRED_FIELDS = ["username"]
 
     class Meta:

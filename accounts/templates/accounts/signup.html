@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <style>
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Sign Up</h2>
+    <form method="POST" action=".">
+        {% csrf_token %}
+
+        <label for="{{ form.email.id_for_label }}">Email:</label>
+        <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" placeholder="Email" class="your-custom-input-style">
+
+        <label for="{{ form.password1.id_for_label }}">Password:</label>
+        <input type="password" name="{{ form.password1.name }}" id="{{ form.password1.id_for_label }}" placeholder="Password" class="your-custom-input-style">
+
+        <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+        <input type="password" name="{{ form.password2.name }}" id="{{ form.password2.id_for_label }}" placeholder="Confirm Password" class="your-custom-input-style">
+
+        {{ form.errors }}
+
+        <button type="submit">Sign Up</button>
+    </form>
+</body>
+</html>
