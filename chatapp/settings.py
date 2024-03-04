@@ -164,7 +164,7 @@ DJOSER = {
 # Simple JWT configuration
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
     'ROTATE_REFRESH_TOKENS': True, # refresh token時除了access也更新refresh
     'BLACKLIST_AFTER_ROTATION': True, # 更新refresh後把舊的access和refresh加入黑名單
     'UPDATE_LAST_LOGIN': False,

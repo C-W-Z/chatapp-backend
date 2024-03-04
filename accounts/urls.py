@@ -2,7 +2,7 @@
 from django.urls import path, include
 from django.contrib.auth.views import LoginView
 from . import views
-from .views import signup, CustomTokenObtainPairView# ,CustomAuthToken
+from .views import CustomTokenObtainPairView# ,signup,CustomAuthToken
 from rest_framework.routers import DefaultRouter
 from accounts import views
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
