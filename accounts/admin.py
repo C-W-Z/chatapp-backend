@@ -11,7 +11,7 @@ class CustomUserChangeForm(UserChangeForm):
 
 class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
-    list_display = ('email', 'username', 'is_staff', 'is_superuser')
+    list_display = ('email', 'username', 'last_login', 'date_joined', 'is_staff', 'is_superuser')
     search_fields = ('email', 'username')
     list_filter = ('is_staff', 'is_superuser')
     fieldsets = (

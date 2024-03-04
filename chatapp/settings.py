@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders', # CORS
     'rest_framework', # Django REST framework
-    'rest_framework.authtoken',  # Token Authentication
     'djoser',  # For more advanced features like user registration, password reset, etc.
     'rest_framework_simplejwt',  # Simple Json Web Token
     'rest_framework_simplejwt.token_blacklist',
@@ -141,8 +140,6 @@ AUTH_USER_MODEL = "accounts.User"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # Use Token Authentication
-        # 'rest_framework.authentication.TokenAuthentication',
         # Use JWT Authentication
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
@@ -192,7 +189,7 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
-    
+
     # It will work instead of the default serializer(rest_framework_simplejwt.serializers.TokenObtainPairSerializer).
     "TOKEN_OBTAIN_SERIALIZER": "accounts.serializers.CustomTokenObtainPairSerializer",
 }
