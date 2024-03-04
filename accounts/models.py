@@ -13,11 +13,18 @@ class CustomUserManager(BaseUserManager):
         user.save()
         return user
 
+    # 繞過驗證創建superuser
+    # python manage.py shell
+    # from django.contrib.auth import get_user_model
+    # User = get_user_model()
+    # User.objects.create_superuser('admin', 'admin')
+
     # 用在 python manage.py createsuperuser
     def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
+        extra_fields.setdefault("username", "admin")
 
         if extra_fields.get("is_staff") is not True:
             raise ValueError(("Superuser must have is_staff=True."))
