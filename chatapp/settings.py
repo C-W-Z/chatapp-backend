@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-!=thfta(rz($ml+a@oyku8y24ki^g(^!!9fvmkx187usvxe*36
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
@@ -37,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
+    'corsheaders', # CORS
+    'rest_framework', # Django REST framework
+    'rest_framework.authtoken',  # Token Authentication
+    'djoser',  # For more advanced features like user registration, password reset, etc.
+    'rest_framework_simplejwt',  # Simple Json Web Token
     # ====== 自定義APPS ====== #
     'accounts',
 ]
@@ -50,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # CORS
 ]
 
 ROOT_URLCONF = 'chatapp.urls'
@@ -127,5 +134,30 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 自定義 User
-
 AUTH_USER_MODEL = "accounts.User"
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # Use Token Authentication
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+# Configure djoser for more features
+DJOSER = {
+    'LOGIN_FIELD': 'email',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'SERIALIZERS': {
+        'user_create': 'path.to.custom.UserCreateSerializer',
+        'user': 'path.to.custom.UserSerializer',
+    },
+}
+
+# Simple JWT configuration
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
