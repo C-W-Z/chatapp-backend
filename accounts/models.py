@@ -11,6 +11,7 @@ class CustomUserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
+        Profile.objects.create(user=user)
         return user
 
     # 繞過驗證創建superuser
@@ -36,10 +37,8 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractUser):
     first_name = None
     last_name = None
-    email = models.EmailField(unique=True)
     username = models.CharField(max_length=50, blank=True)
-    description = models.CharField(max_length=256, blank=True)
-    phone = models.CharField(max_length=20, blank=True, null=True)
+    email = models.EmailField(unique=True)
     date_joined = models.DateTimeField(default=timezone.now)
     last_login = models.DateTimeField(blank=True, null=True)
 
@@ -57,3 +56,12 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    # avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+
+    def __str__(self):
+        return self.user.email

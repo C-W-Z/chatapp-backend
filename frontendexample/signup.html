@@ -40,17 +40,19 @@ function signup() {
         body: JSON.stringify(Object.fromEntries(formData)),
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error('Signup failed');
-        }
+        console.log(response);
+        //if (!response.ok) {
+        //    console.log(response.json());
+        //    throw new Error('Signup failed');
+        //}
         return response.json();
     })
     .then(data => {
-        console.log('Signup successful', data);
+        console.log('Response:', data);
         // Handle success, redirect, or any other action
     })
     .catch(error => {
-        console.error('Error during signup', error);
+        console.error('Error during signup:', error);
         // Handle error, display message, etc.
     });
 }

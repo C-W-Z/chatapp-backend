@@ -21,6 +21,7 @@
         <button type="button" onclick="login()">Login</button>
         <button type="button" onclick="refreshToken()">Refresh Token</button>
         <button type="button" onclick="verifyToken()">Verify Token</button>
+        <button type="button" onclick="logout()">Logout</button>
     </form>
 
     <script>
@@ -130,6 +131,26 @@
                 })
                 .then(data => {
                     console.log('Response:', data);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        function logout() {
+            // 发送注销请求
+            fetch('http://127.0.0.1:8000/accounts/api/logout/', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${t.access}`,  // 用你的实际访问令牌替换这里的占位符
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Logout successful');
+                        // 清除本地存储的令牌
+                        localStorage.removeItem('token');
+                    } else {
+                        console.error('Logout failed');
+                    }
                 })
                 .catch(error => console.error('Error:', error));
         }

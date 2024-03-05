@@ -1,19 +1,18 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.forms import UserChangeForm
-from .models import User
+from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .models import User, Profile
 
 # Register your models here.
 
-class CustomUserChangeForm(UserChangeForm):
-    class Meta(UserChangeForm.Meta):
-        model = User
-
 class CustomUserAdmin(UserAdmin):
+    add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     list_display = ('email', 'username', 'last_login', 'date_joined', 'is_staff', 'is_superuser')
+    ordering = ('date_joined', 'last_login')
     search_fields = ('email', 'username')
     list_filter = ('is_staff', 'is_superuser')
+    readonly_fields = ('date_joined', 'last_login')
     fieldsets = (
         ('Login Info', {'fields': (
             'email',
@@ -21,8 +20,6 @@ class CustomUserAdmin(UserAdmin):
         )}),
         ('Personal info', {'fields': (
             'username',
-            'phone',
-            'description'
         )}),
         ('Permissions', {'fields': (
             'is_active',
@@ -36,5 +33,12 @@ class CustomUserAdmin(UserAdmin):
             'last_login'
         )}),
     )
+    add_fieldsets = (
+        (None,{
+                'classes': ('wide',),
+                'fields': ('username', 'email', 'password1', 'password2'),
+        }),
+    )
 
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(Profile)
