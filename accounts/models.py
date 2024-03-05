@@ -62,6 +62,7 @@ class UserProfile(models.Model):
     # avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     bio = models.TextField(blank=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
+    birthday = models.DateField(blank=True, null=True)
 
     class Meta:
         # Model在後台的顯示名稱

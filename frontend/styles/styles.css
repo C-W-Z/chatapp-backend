@@ -1,0 +1,259 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --white-color: hsl(0, 0%, 100%);
+  --black-color: hsl(0, 0%, 0%);
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Poppins", sans-serif;
+  --h1-font-size: 1.75rem;
+  --normal-font-size: 1rem;
+  --small-font-size: .813rem;
+  /*========== Font weight ==========*/
+  --font-medium: 500;
+}
+
+/*=============== BASE ===============*/
+html {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 6.5px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body,
+input,
+button {
+  font-size: var(--normal-font-size);
+  font-family: var(--body-font);
+}
+
+body {
+  color: var(--black-color);
+}
+
+input,
+button {
+  border: none;
+  outline: none;
+}
+
+input[type='checkbox']:checked {
+  accent-color: var(--black-color);
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== LOGIN ===============*/
+.form {
+  position: relative;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+}
+
+.form__img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.form__form {
+  position: relative;
+  background-color: var(--white-color);
+  border: 2px solid var(--black-color);
+  margin-inline: 1.5rem;
+  padding: 2.5rem 2rem;
+  border-radius: 1rem;
+  /* backdrop-filter: blur(8px); */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.form__title {
+  text-align: center;
+  font-size: var(--h1-font-size);
+  font-weight: var(--font-medium);
+  margin-bottom: 1.5rem;
+}
+
+.form__error {
+  font-size: var(--small-font-size);
+  margin-bottom: 1rem;
+}
+
+.form__content,
+.form__box {
+  display: grid;
+}
+
+.form__content {
+  row-gap: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.form__box {
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  column-gap: 0.75rem;
+  border-bottom: 2px solid var(--black-color);
+}
+
+.form__icon,
+.form__eye {
+  font-size: 1.25rem;
+}
+
+.form__input {
+  width: 100%;
+  padding-block: 0.8rem;
+  background: none;
+  color: var(--black-color);
+  position: relative;
+  z-index: 1;
+}
+
+.form__box-input {
+  position: relative;
+}
+
+.form__label {
+  position: absolute;
+  left: 0;
+  top: 13px;
+  font-weight: var(--font-medium);
+  transition: top 0.3s, font-size 0.3s;
+}
+
+.form__eye {
+  position: absolute;
+  right: 0;
+  top: 18px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.form__box:nth-child(2) input {
+  padding-right: 1.8rem;
+}
+
+.form__check,
+.form__check-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form__check {
+  margin-bottom: 1rem;
+}
+
+.form__check-label,
+.form__forgot,
+.form__register {
+  font-size: var(--small-font-size);
+}
+
+.form__check-group {
+  column-gap: 0.5rem;
+}
+
+.form__check-input {
+  width: 16px;
+  height: 16px;
+}
+
+.form__check-input,
+.form__check-label,
+.form__forgot,
+.form__register a {
+  cursor: pointer;
+}
+
+.form__forgot {
+  color: var(--black-color);
+}
+
+.form__forgot:hover {
+  text-decoration: underline;
+}
+
+.form__button {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: var(--white-color);
+  background-color: var(--black-color);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+.form__register {
+  text-align: center;
+}
+
+.form__register a, .form__check-label a {
+  color: var(--black-color);
+  font-weight: var(--font-medium);
+}
+
+.form__register a:hover, .form__check-label a:hover {
+  text-decoration: underline;
+}
+
+/* Input focus move up label */
+.form__input:focus+.form__label {
+  top: -12px;
+  font-size: var(--small-font-size);
+}
+
+/* Input focus sticky top label */
+.form__input:not(:placeholder-shown).form__input:not(:focus)+.form__label {
+  top: -12px;
+  font-size: var(--small-font-size);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .form {
+    justify-content: center;
+  }
+
+  .form__form {
+    width: 432px;
+    padding: 3rem 3rem 2.5em;
+    border-radius: 1.5rem;
+  }
+
+  .form__title {
+    font-size: 2rem;
+  }
+}

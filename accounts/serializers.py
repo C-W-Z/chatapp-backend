@@ -32,7 +32,12 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data.update({'username': self.user.username})
         return data
 
-class ProfileSerializer(serializers.ModelSerializer):
+class UserNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username']
+
+class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['bio', 'phone']
+        fields = ['bio', 'phone', 'birthday']

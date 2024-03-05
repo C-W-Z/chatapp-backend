@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!--=============== REMIXICONS ===============-->
+   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+   <!--=============== CSS ===============-->
+   <link rel="stylesheet" href="styles/styles.css">
+
+   <title>Signup</title>
+</head>
+
+<body>
+   <div class="form">
+      <!-- <img src="assets/img/form-bg.png" alt="form image" class="form__img"> -->
+
+      <form action="" class="form__form" id="form-form" autocomplete="off">
+         <h1 class="form__title">Signup</h1>
+
+         <div class="form__content">
+            <div class="form__box">
+               <i class="ri-mail-line form__icon"></i>
+
+               <div class="form__box-input">
+                  <input type="email" required class="form__input" id="form-email" placeholder=" ">
+                  <label for="form-email" class="form__label">Email</label>
+               </div>
+            </div>
+
+            <div class="form__box">
+               <i class="ri-lock-2-line form__icon"></i>
+
+               <div class="form__box-input">
+                  <input type="password" required class="form__input" id="form-pass" placeholder=" ">
+                  <label for="form-pass" class="form__label">Password</label>
+                  <i class="ri-eye-off-line form__eye" id="form-eye"></i>
+               </div>
+            </div>
+
+            <div class="form__box">
+               <i class="ri-lock-2-line form__icon"></i>
+
+               <div class="form__box-input">
+                  <input type="password" required class="form__input" id="form-confirmpass" placeholder=" ">
+                  <label for="form-confirmpass" class="form__label">Confirm Password</label>
+                  <i class="ri-eye-off-line form__eye" id="confirm-eye"></i>
+               </div>
+            </div>
+         </div>
+
+         <div class="form__check">
+            <div class="form__check-group">
+               <input type="checkbox" required class="form__check-input" id="form-check">
+               <label for="form-check" class="form__check-label">I accept all <a href="#">terms & conditions</a></label>
+            </div>
+
+            <!-- <a href="#" class="form__forgot">Forgot Password?</a> -->
+         </div>
+
+         <div class="form__error">
+            <!-- * Passwords do not match -->
+         </div>
+
+         <button type="submit" class="form__button">Signup</button>
+
+         <p class="form__register">
+            Already have an account? <a href="#">Login</a>
+         </p>
+      </form>
+   </div>
+
+   <!--=============== MAIN JS ===============-->
+   <script src="scripts/signup.js"></script>
+</body>
+
+</html>

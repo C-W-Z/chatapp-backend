@@ -1,5 +1,5 @@
 from .models import User, UserProfile
-from .serializers import SignUpSerializer, CustomTokenObtainPairSerializer, ProfileSerializer
+from .serializers import SignUpSerializer, CustomTokenObtainPairSerializer, UserNameSerializer, UserProfileSerializer
 from .utils import invalidate_tokens
 from rest_framework import generics, views, status
 from rest_framework.response import Response
@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # Create your views here.
 
+# POST: signup User
 class SignUpView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = SignUpSerializer
@@ -33,6 +34,7 @@ class SignUpView(generics.CreateAPIView):
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
+# POST: delete all tokens of the User
 class LogOutView(views.APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
@@ -41,9 +43,20 @@ class LogOutView(views.APIView):
         invalidate_tokens(user=self.request.user)
         return Response({"message": "Successfully logged out."}, status=status.HTTP_200_OK)
 
-class ProfileView(generics.RetrieveUpdateAPIView):
+# GET/PUT/PATCH User.username
+class UserNameView(generics.RetrieveUpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserNameSerializer
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
+    def get_object(self):
+        return self.request.user
+
+# GET/PUT/PATCH UserProfile
+class UserProfileView(generics.RetrieveUpdateAPIView):
     queryset = UserProfile.objects.all()
-    serializer_class = ProfileSerializer
+    serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
 

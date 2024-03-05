@@ -47,7 +47,7 @@
                         console.log('Login successful');
                         return response.json();
                     } else {
-                        throw new Error('Login failed');
+                        return response.json();
                     }
                 })
                 .then(data => {
