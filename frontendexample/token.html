@@ -22,6 +22,7 @@
         <button type="button" onclick="refreshToken()">Refresh Token</button>
         <button type="button" onclick="verifyToken()">Verify Token</button>
         <button type="button" onclick="logout()">Logout</button>
+        <button type="button" onclick="getProfile()">Get Profile</button>
     </form>
 
     <script>
@@ -151,6 +152,40 @@
                     } else {
                         console.error('Logout failed');
                     }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        function getProfile() {
+            // 获取 Profile
+            fetch('http://127.0.0.1:8000/accounts/api/profile/', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${t.access}`,
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Profile Data:', data);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        function patchProfile() {
+            // 修改 Profile
+            fetch('http://127.0.0.1:8000/accounts/api/profile/', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${t.access}`,
+                },
+                body: JSON.stringify({
+                    // 你要修改的 Profile 数据
+                    bio: 'New bio',
+                    // 其他字段...
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Profile updated successfully:', data);
                 })
                 .catch(error => console.error('Error:', error));
         }

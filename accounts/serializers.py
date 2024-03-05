@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Profile
+from .models import User, UserProfile
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .utils import invalidate_tokens
 
@@ -34,5 +34,5 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Profile
-        fields = '__all__'
+        model = UserProfile
+        fields = ['bio', 'phone']

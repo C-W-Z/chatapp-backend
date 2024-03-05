@@ -1,4 +1,4 @@
-from .models import User, Profile
+from .models import User, UserProfile
 from .serializers import SignUpSerializer, CustomTokenObtainPairSerializer, ProfileSerializer
 from .utils import invalidate_tokens
 from rest_framework import generics, views, status
@@ -42,7 +42,7 @@ class LogOutView(views.APIView):
         return Response({"message": "Successfully logged out."}, status=status.HTTP_200_OK)
 
 class ProfileView(generics.RetrieveUpdateAPIView):
-    queryset = Profile.objects.all()
+    queryset = UserProfile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]

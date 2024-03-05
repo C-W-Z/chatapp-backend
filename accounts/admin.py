@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import User, Profile
+from .models import User, UserProfile
 
 # Register your models here.
 
@@ -35,10 +35,15 @@ class CustomUserAdmin(UserAdmin):
     )
     add_fieldsets = (
         (None,{
-                'classes': ('wide',),
-                'fields': ('username', 'email', 'password1', 'password2'),
+            'classes': ('wide',),
+            'fields': ('username', 'email', 'password1', 'password2'),
         }),
     )
 
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'phone')
+    search_fields = ('user__email', 'user__username', 'phone')
+    list_filter = ('user__is_active',)
+
 admin.site.register(User, CustomUserAdmin)
-admin.site.register(Profile)
+admin.site.register(UserProfile, UserProfileAdmin)

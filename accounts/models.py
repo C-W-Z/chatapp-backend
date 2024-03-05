@@ -11,7 +11,7 @@ class CustomUserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
-        Profile.objects.create(user=user)
+        UserProfile.objects.create(user=user)
         return user
 
     # 繞過驗證創建superuser
@@ -57,11 +57,16 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
 
-class Profile(models.Model):
+class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     bio = models.TextField(blank=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
-    # avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+
+    class Meta:
+        # Model在後台的顯示名稱
+        verbose_name = "User Profile"
+        verbose_name_plural = 'User Profiles'
 
     def __str__(self):
         return self.user.email
