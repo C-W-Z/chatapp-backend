@@ -37,7 +37,7 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractUser):
     first_name = None
     last_name = None
-    username = models.CharField(max_length=50, blank=True)
+    username = models.CharField(max_length=50, blank=True, null=True)
     email = models.EmailField(unique=True)
     date_joined = models.DateTimeField(default=timezone.now)
     last_login = models.DateTimeField(blank=True, null=True)
@@ -60,8 +60,10 @@ class User(AbstractUser):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
-    bio = models.TextField(blank=True)
+    bio = models.TextField(blank=True, null=True)
+    website = models.URLField(blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
     birthday = models.DateField(blank=True, null=True)
 
     class Meta:
